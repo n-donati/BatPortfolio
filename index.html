@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style/style.css" />
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="./assets/images/favicon.jpg"
+    />
+    <title>NDonatti.dev</title>
+  </head>
+  <body>
+    <div id="black-overlay"></div>
+    <content>
+      <div id="loading-screen">
+        <img src="./assets/images/loading.png" alt="loading" class="loading" />
+        <p id="loading-text">Press any key to continue...</p>
+      </div>
+
+      <div class="main">
+        <video
+          loop
+          muted
+          playsinline
+          src="./assets/videos/Bat.mp4"
+          class="video"
+        ></video>
+
+        <!-- Logo -->
+        <div class="logo-container">
+          <img src="./assets/images/logo.png" alt="Logo" class="logo" />
+        </div>
+
+        <!-- Main Menu -->
+        <div id="menu" class="main-menu">
+          <ul class="list">
+            <li><a href="./pages/portfolio.html">Web Portfolio</a></li>
+            <li>
+              <a href="./pages/NicolasDonati_CV_en.pdf" target="_blank"
+                >Curriculum Vitae</a
+              >
+            </li>
+            <li><a href="./pages/portfolio.html" id="contact-me">Contact Me</a></li>
+          </ul>
+        </div>
+
+        <!-- Socials Menu -->
+        <div id="social-menu" class="social-menu">
+          <ul class="list">
+            <li><a href="#">Linkedin</a></li>
+            <li><a href="#">Github</a></li>
+            <li><a href="#">Mail</a></li>
+            <li><a href="#">Discord</a></li>
+            <li><a href="#" id="go-back">GO-BACK</a></li>
+          </ul>
+        </div>
+      </div>
+    </content>
+
+    <script src="./js/script.js"></script>
+  </body>
+</html>

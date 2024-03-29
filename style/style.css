@@ -1,0 +1,214 @@
+/* Reset and basic styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Courier New", Courier, monospace;
+}
+
+/* Loading screen */
+#loading-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+
+.loading {
+  width: 5rem;
+  animation: pulse 1.2s infinite;
+}
+
+#loading-text {
+  color: #fff;
+  font-size: 24px;
+  text-align: center;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
+
+.main {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden; /* Ensure no scrollbars */
+  touch-action: none; /* Prevent default touch gestures */
+  overscroll-behavior: none; /* Prevent overscrolling */
+}
+
+/* Video */
+.video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the video covers the entire area */
+  z-index: -1; /* Place the video behind other content */
+}
+
+/* Logo animation */
+.logo-container {
+  position: absolute;
+  top: 15%;
+  right: -500%;
+  z-index: 100;
+}
+
+.animate-logo {
+  animation: fadeInRight 2.5s forwards;
+}
+
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    right: -50%;
+  }
+  100% {
+    opacity: 1;
+    right: calc(50% - 307px);
+  }
+}
+
+/* Navigation */
+li {
+  list-style: none;
+  display: block;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+li a {
+  position: relative;
+  text-decoration: none;
+  color: #fff;
+  font-size: 40px;
+  padding: 0 10px;
+  display: inline-block;
+  transition: color 0.3s, text-shadow 0.3s;
+  color: rgb(255, 185, 0);
+  text-shadow: 0 0 3px black;
+}
+
+li a:hover {
+  color: white;
+  animation: flash 0.5s linear infinite alternate;
+}
+
+@keyframes flash {
+  0% {
+    color: white;
+  }
+  50% {
+    color: #4b4b4b;
+  }
+  100% {
+    color: white;
+  }
+}
+
+/* Navigation list */
+.list {
+  position: absolute;
+  bottom: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  font-weight: bold;
+}
+
+.list li {
+  display: none;
+}
+
+.list.show li {
+  display: block;
+  animation: fadeInList 1s ease-in-out forwards;
+}
+
+@keyframes fadeInList {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .logo-container {
+    position: absolute;
+    top: 15vh;
+    z-index: 100;
+    width: 100%; /* Set width to 80% of the page */
+    margin: auto; /* Center the container horizontally */
+  }
+
+  .logo-container img {
+    width: 90%; /* Make the image fill its container */
+    height: auto;
+    display: block; /* Ensure image is centered */
+    margin: auto; /* Center the image horizontally */
+  }
+
+  @keyframes fadeInRight {
+    0% {
+      opacity: 0;
+      right: -50%;
+    }
+    100% {
+      opacity: 1;
+      right: calc(50% - 195px);
+    }
+  }
+
+  .video {
+    object-fit: cover;
+    object-position: 60% center;
+  }
+  
+  ul.list {
+    width: 100%; /* Occupy full width of its container */
+    text-align: center; /* Center align the list items */
+    margin: auto; /* Center the list horizontally */
+  }
+
+  .list {
+    bottom: 15vh;
+  }
+
+  li a {
+    font-size: 28px;
+  }
+}
+
+#black-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0; /* Initially hidden */
+  pointer-events: none; /* Disable pointer events */
+  transition: opacity 0.5s ease; /* Smooth transition */
+  z-index: 999; /* Ensure it's on top of other content */
+}
