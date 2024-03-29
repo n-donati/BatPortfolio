@@ -30,33 +30,6 @@
 
 
 
-/* Keyframe animations */
-@keyframes pop-in {
-  0% {
-    opacity: 0.5; /* Start with the same opacity as blur-out */
-    transform: scale(0.8); /* Start with the same scale */
-    filter: blur(2px); /* Start with the same blur radius */
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-    filter: blur(0);
-  }
-}
-
-@keyframes blur-out {
-  0% {
-    opacity: 1;
-    transform: scale(1); /* Start with the same scale */
-    filter: blur(0);
-  }
-  100% {
-    opacity: 0.5; /* Adjust opacity as needed */
-    transform: scale(0.8); /* End with the same scale as pop-in */
-    filter: blur(2px);
-  }
-}
-
 /* Animation class */
 .pop-in {
   opacity: 0.5; /* Set initial opacity */
@@ -226,14 +199,14 @@ main {
 /* About section styles */
 #about {
   padding: 0 20%;
-  margin-bottom: 5rem;
+  margin-bottom: 200px;
 }
 
 /* Profile section styles */
 .profile-section {
   display: flex;
   align-items: center;
-  margin-bottom: 10rem;
+  margin-bottom: 6rem;
 }
 
 /* Profile picture styles */
@@ -315,34 +288,32 @@ main {
 }
 
 /* About section styles */
-.about-section {
-  display: grid;
-  gap: 20px; /* Provide spacing between grid items */
-  margin-top: 50px;
+.about-text {
+  margin-bottom: 2rem;
 }
 
-/* Recent activity section styles */
+.columns {
+  display: flex; /* Use flexbox for layout */
+  justify-content: center; /* Center the columns horizontally */
+  gap: 40px; /* Add some spacing between columns */
+  padding: 10px; /* Add some padding for spacing */
+}
+
+.column {
+  flex: 1; /* Each column takes up equal space */
+  max-width: 400px; /* Set maximum width for each column */
+  text-align: left; /* Align text inside columns to the left */
+  padding: 10px; /* Add some padding for spacing */
+  border-top: 1px solid #ccc; /* Optional: Add border for visual separation */
+  border-radius: 8px; /* Optional: Add border radius for rounded corners */
+  font-size: 20px; /* Increase font size */
+}
+
 .recent-activity {
-  margin-right: auto; /* Push recent-activity to the left */
+  margin-top: 40px;
+
 }
 
-.recent-activity h3 {
-  font-size: 28px;
-  margin-bottom: 20px;
-  text-align: center; /* Center-align the headings */
-  text-decoration: underline; /* Underline the text */
-}
-
-.recent-activity h4,
-.about-info p {
-  font-size: 22px;
-  word-spacing: 0px;
-}
-
-.recent-activity img {
-  max-width: 20px;
-  height: auto;
-}
 
 /* Loading bar styles */
 .loading-bar {
@@ -362,7 +333,7 @@ main {
 
 #skills {
   padding: 0 20%;
-  margin-bottom: 3rem;
+  margin-bottom: 200px;
 }
 
 .skills-text {
@@ -426,7 +397,7 @@ main {
 
 #projects {
   padding: 0 20%;
-  margin-bottom: 2rem;
+  margin-bottom: 200px;
 }
 
 .slider {
@@ -643,7 +614,7 @@ main {
   }
 
   .about-text {
-    margin-bottom: 0.5rem;
+    margin-bottom: 2rem;
   }
 
   .profile-info {
@@ -665,12 +636,14 @@ main {
     margin-top: 20px;
   }
 
-  .about-section {
-    margin-top: 30px;
+  .columns {
+    flex-direction: column; /* Change to a column layout on smaller screens */
+    align-items: center; /* Center the columns vertically */
   }
 
-  .recent-activity h3 {
-    font-size: 30px;
+  .column {
+    max-width: 90%; /* Each column occupies 90% of the screen width */
+    font-size: 14px;
   }
 
   .loading-bar {

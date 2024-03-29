@@ -5,6 +5,52 @@ document.addEventListener('DOMContentLoaded', function() {
   audio.volume = 0.1;
 });
 
+// SKILLS
+document.addEventListener("DOMContentLoaded", function() {
+  const skills = [
+    { name: "C", image: "c_logo.png" },
+    { name: "Docker", image: "docker_logo.png" },
+    { name: "AWS", image: "aws_logo.png" },
+    { name: "C++", image: "cpp_logo.png" },
+    { name: "Django", image: "django_logo.png" },
+    { name: "Firebase", image: "firebase_logo.png" },
+    { name: "JavaScript", image: "js_logo.png" },
+    { name: "Node.js", image: "node_logo.png" },
+    { name: "MySQL", image: "mysql_logo.png" },
+    { name: "TypeScript", image: "ts_logo.png" },
+    { name: "React", image: "react_logo.png" },
+    { name: "Vercel", image: "vercel_logo.png" },
+    { name: "Python", image: "py_logo.png" },
+    { name: "Tailwind", image: "tailwind_logo.png" },
+    { name: "...", image: "upcoming.png" },
+    { name: "Java", image: "java_logo.png" },
+    { name: "...", image: "upcoming.png" },
+    { name: "...", image: "upcoming.png" },
+    { name: "HTML", image: "html_logo.png" },
+    { name: "...", image: "upcoming.png" },
+    { name: "Shell", image: "shell_logo.png" },
+    { name: "CSS", image: "css_logo.png" },
+    { name: "...", image: "upcoming.png" },
+    { name: "SQL", image: "sql_logo.png" }
+  ];
+
+  const skillRows = document.querySelectorAll(".skill-row");
+
+  skills.forEach((skill, index) => {
+    const skillCircle = document.createElement("div");
+    skillCircle.classList.add("skill-circle");
+    skillCircle.dataset.skill = skill.name;
+
+    const img = new Image();
+    img.src = `../assets/characters/${skill.image}`;
+    img.alt = skill.name;
+
+    skillCircle.appendChild(img);
+    skillRows[index % skillRows.length].appendChild(skillCircle);
+  });
+});
+
+
 // HEADER HIDER / SHOWER
 var prevScrollpos = window.pageYOffset;
 window.onscroll = function () {
@@ -69,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function() {
     timeout = setTimeout(function() {
       var visible = [];
       elements.forEach(function(element) {
-        if (isFullyInViewport(element)) {
+        if (isMostlyInViewport(element)) {
           visible.push(element);
         }
       });
@@ -87,13 +133,18 @@ document.addEventListener("DOMContentLoaded", function() {
 
   window.addEventListener("scroll", toggleVisibility);
 
-  function isFullyInViewport(element) {
+  function isMostlyInViewport(element) {
     var rect = element.getBoundingClientRect();
+    var windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    var windowWidth = window.innerWidth || document.documentElement.clientWidth;
+    var verticalThreshold = windowHeight * 0.02; // Adjust the threshold as needed
+    var horizontalThreshold = windowWidth * 0; // Adjust the threshold as needed
+
     return (
-      rect.top >= 0 &&
-      rect.left >= 0 &&
-      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+      rect.top >= -verticalThreshold &&
+      rect.left >= -horizontalThreshold &&
+      rect.bottom <= windowHeight + verticalThreshold &&
+      rect.right <= windowWidth + horizontalThreshold
     );
   }
 });
@@ -140,106 +191,6 @@ document.addEventListener("DOMContentLoaded", function () {
   
     type(); // Start the typing effect
   });
-
-// SPAM GIFS / IMAGES
-document.addEventListener("DOMContentLoaded", function() {
-  const loadingBar = document.getElementById("loadingBar1");
-
-  const imageSources = [
-    "../assets/images/s_stud.gif",
-    "../assets/images/s_stud.gif",
-    "../assets/images/s_stud.gif",
-    "../assets/images/g_stud.gif",
-    "../assets/images/g_stud.gif",
-    "../assets/images/g_stud.gif",
-    "../assets/images/g_stud.gif",
-    "../assets/images/g_stud.gif",
-    "../assets/images/b_stud.gif",
-    "../assets/images/b_stud.gif",
-    "../assets/images/b_stud.gif",
-    "../assets/images/b_stud.gif",
-    "../assets/images/b_stud.gif",
-    "../assets/images/b_stud.gif",
-    "../assets/images/p_stud.gif",
-    "../assets/images/p_stud.gif"
-  ];
-
-  imageSources.forEach(src => {
-    const img = document.createElement("img");
-    img.src = src;
-    loadingBar.appendChild(img);
-  });
-});
-
-document.addEventListener("DOMContentLoaded", function() {
-  const loadingBar = document.getElementById("loadingBar2");
-
-  const imageSources = [
-    "../assets/images/s_stud.gif",
-    "../assets/images/s_stud.gif",
-    "../assets/images/g_stud.gif",
-    "../assets/images/g_stud.gif",
-    "../assets/images/g_stud.gif",
-    "../assets/images/g_stud.gif",
-    "../assets/images/g_stud.gif",
-    "../assets/images/b_stud.gif",
-    "../assets/images/b_stud.gif",
-    "../assets/images/b_stud.gif",
-    "../assets/images/p_stud.gif",
-    "../assets/images/p_stud.gif"
-  ];
-
-  imageSources.forEach(src => {
-    const img = document.createElement("img");
-    img.src = src;
-    loadingBar.appendChild(img);
-  });
-});
-
-document.addEventListener("DOMContentLoaded", function() {
-  const skills = [
-    { name: "C", image: "c_logo.png" },
-    { name: "Docker", image: "docker_logo.png" },
-    { name: "AWS", image: "aws_logo.png" },
-    { name: "C++", image: "cpp_logo.png" },
-    { name: "Django", image: "django_logo.png" },
-    { name: "Firebase", image: "firebase_logo.png" },
-    { name: "JavaScript", image: "js_logo.png" },
-    { name: "Node.js", image: "node_logo.png" },
-    { name: "MySQL", image: "mysql_logo.png" },
-    { name: "TypeScript", image: "ts_logo.png" },
-    { name: "React", image: "react_logo.png" },
-    { name: "Vercel", image: "vercel_logo.png" },
-    { name: "Python", image: "py_logo.png" },
-    { name: "Tailwind", image: "tailwind_logo.png" },
-    { name: "...", image: "upcoming.png" },
-    { name: "Java", image: "java_logo.png" },
-    { name: "...", image: "upcoming.png" },
-    { name: "...", image: "upcoming.png" },
-    { name: "HTML", image: "html_logo.png" },
-    { name: "...", image: "upcoming.png" },
-    { name: "Shell", image: "shell_logo.png" },
-    { name: "CSS", image: "css_logo.png" },
-    { name: "...", image: "upcoming.png" },
-    { name: "SQL", image: "sql_logo.png" }
-  ];
-
-  const skillRows = document.querySelectorAll(".skill-row");
-
-  skills.forEach((skill, index) => {
-    const skillCircle = document.createElement("div");
-    skillCircle.classList.add("skill-circle");
-    skillCircle.dataset.skill = skill.name;
-
-    const img = document.createElement("img");
-    img.src = `../assets/characters/${skill.image}`;
-    img.alt = skill.name;
-
-    skillCircle.appendChild(img);
-    skillRows[index % skillRows.length].appendChild(skillCircle);
-  });
-});
-
 
 
 // PLAY SOUND ON CIRCLE HOVER / CLICK
@@ -305,8 +256,10 @@ let items = document.querySelectorAll('.slider .item');
     next.onclick = function(){
         active = active + 1 < items.length ? active + 1 : active;
         loadShow();
+        playMenuMoveSound();
     }
     prev.onclick = function(){
         active = active - 1 >= 0 ? active - 1 : active;
         loadShow();
+        playMenuMoveSound();
     }
