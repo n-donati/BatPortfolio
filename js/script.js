@@ -59,7 +59,11 @@ document.addEventListener("DOMContentLoaded", function () {
   menuItems.forEach((item) => {
     if (
       item.querySelector("a").textContent === "Contact Me" ||
-      item.querySelector("a").textContent === "GO BACK"
+      item.querySelector("a").textContent === "GO BACK" ||
+      item.querySelector("a").textContent === "Linkedin" ||
+      item.querySelector("a").textContent === "Github" ||
+      item.querySelector("a").textContent === "Mail" ||
+      item.querySelector("a").textContent === "Discord"
     )
       return;
     item.addEventListener("click", function () {

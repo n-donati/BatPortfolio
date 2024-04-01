@@ -145,6 +145,14 @@ li a {
   text-shadow: 0 0 3px black;
 }
 
+.horizontalList {
+  display: flex;
+}
+
+.horizontalList li {
+  margin-right: 10px;
+}
+
 li a:hover {
   color: white;
   animation: flash 0.5s linear infinite alternate;
@@ -207,6 +215,10 @@ li a:hover {
 
   li a {
     font-size: 28px;
+  }
+
+  .horizontalList {
+    display: block;
   }
 }
 
