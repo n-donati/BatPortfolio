@@ -1,6 +1,8 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener("DOMContentLoaded", function () {
   const loader = document.getElementById("loading-screen");
   const video = document.querySelector(".video");
+  const blackOverlay = document.getElementById("black-overlay");
+  const menuItems = document.querySelectorAll(".list li");
 
   function hideLoader() {
     loader.style.display = "none";
@@ -11,7 +13,10 @@ document.addEventListener('DOMContentLoaded', function() {
     video.volume = 0.2;
     video.play();
     setTimeout(animateLogo, 1500);
-    setTimeout(() => document.querySelector(".list").classList.add("show"), 3000);
+    setTimeout(
+      () => document.querySelector(".mainMenu").classList.add("show"),
+      3000
+    );
   }
 
   function animateLogo() {
@@ -23,14 +28,14 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function playMenuMoveSound() {
-    playMenuSound('../assets/audios/MENUMOVE.WAV');
+    playMenuSound("../assets/audios/MENUMOVE.WAV");
   }
 
-  const listItems = document.querySelectorAll('.list li');
-  listItems.forEach(item => {
-    item.addEventListener('mouseenter', playMenuMoveSound);
-    item.addEventListener('click', function() {
-      playMenuSound('../assets/audios/MENUSELECT.WAV');
+  const listItems = document.querySelectorAll(".list li");
+  listItems.forEach((item) => {
+    item.addEventListener("mouseenter", playMenuMoveSound);
+    item.addEventListener("click", function () {
+      playMenuSound("../assets/audios/MENUSELECT.WAV");
     });
   });
 
@@ -40,22 +45,33 @@ document.addEventListener('DOMContentLoaded', function() {
   document.addEventListener("touchstart", handleInteraction);
 
   // Functions
+  let interactionHandled = false;
+
   function handleInteraction(event) {
-    hideLoader();
-    playVideo();
+    if (!interactionHandled) {
+      interactionHandled = true;
+      hideLoader();
+      playVideo();
+    }
   }
 
-  const blackOverlay = document.getElementById('black-overlay');
-  const content = document.getElementById('content');
-  const menuItems = document.querySelectorAll('.list li');
-
-  menuItems.forEach(item => {
-    item.addEventListener('click', function(event) {
+  // Add black overlay, exclude for Contact Me item
+  menuItems.forEach((item) => {
+    if (
+      item.querySelector("a").textContent === "Contact Me" ||
+      item.querySelector("a").textContent === "GO BACK"
+    )
+      return;
+    item.addEventListener("click", function () {
       event.preventDefault();
-      blackOverlay.style.opacity = '1';
-      blackOverlay.style.pointerEvents = 'auto';
+      blackOverlay.style.opacity = "1";
+      blackOverlay.style.pointerEvents = "auto";
       fadeOutVideo();
-      setTimeout(() => window.location.href = item.querySelector('a').getAttribute('href'), 800);
+      setTimeout(
+        () =>
+          (window.location.href = item.querySelector("a").getAttribute("href")),
+        800
+      );
     });
   });
 
@@ -66,11 +82,35 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const fadeOutVideo = setInterval(() => {
       volume -= fadeOutInterval / fadeOutDuration;
-      if (volume <= 0.00) {
-        volume = 0.00;
+      if (volume <= 0.0) {
+        volume = 0.0;
         clearInterval(fadeOutVideo);
       }
       video.volume = volume;
     }, fadeOutInterval);
   }
+
+  const contactMe = document.getElementById("contact-me");
+  const goBack = document.getElementById("go-back");
+
+  contactMe.addEventListener("click", function () {
+    setTimeout(
+      () => document.querySelector(".mainMenu").classList.remove("show"),
+      200
+    );
+    setTimeout(
+      () => document.querySelector(".socialMenu").classList.add("show"),
+      200
+    );
+  });
+  goBack.addEventListener("click", function () {
+    setTimeout(
+      () => document.querySelector(".socialMenu").classList.remove("show"),
+      200
+    );
+    setTimeout(
+      () => document.querySelector(".mainMenu").classList.add("show"),
+      200
+    );
+  });
 });
