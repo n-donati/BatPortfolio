@@ -91,7 +91,7 @@ listItems.forEach((item) => {
 
 
 // OFFSETTER
-document.querySelectorAll('nav a:not([href="../index.html"])').forEach(anchor => {
+document.querySelectorAll('nav a:not([href="https://ndonatti.me"])').forEach(anchor => {
   anchor.addEventListener('click', function(e) {
       e.preventDefault();
 
