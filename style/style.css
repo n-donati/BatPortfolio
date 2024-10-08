@@ -70,6 +70,7 @@
   top: 15%;
   right: -500%;
   z-index: 100;
+  pointer-events: none;
 }
 
 .animate-logo {
@@ -176,15 +177,17 @@ li a:hover {
     position: absolute;
     top: 15vh;
     z-index: 100;
-    width: 100%; /* Set width to 80% of the page */
-    margin: auto; /* Center the container horizontally */
+    width: 100%;
+    margin: auto;
+    pointer-events: none;
   }
 
   .logo-container img {
-    width: 90%; /* Make the image fill its container */
+    width: 90%;
     height: auto;
-    display: block; /* Ensure image is centered */
-    margin: auto; /* Center the image horizontally */
+    display: block;
+    margin: auto;
+    pointer-events: none;
   }
 
   @keyframes fadeInRight {
