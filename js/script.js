@@ -3,12 +3,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const video = document.querySelector(".video");
   const blackOverlay = document.getElementById("black-overlay");
   const menuItems = document.querySelectorAll(".list li");
-  const mainMenu = document.querySelector(".mainMenu");
-  const socialMenu = document.querySelector(".socialMenu");
-  const contactMe = document.getElementById("contact-me");
-  const goBack = document.getElementById("go-back");
-
-  let interactionHandled = false;
 
   function hideLoader() {
     loader.style.display = "none";
@@ -19,7 +13,10 @@ document.addEventListener("DOMContentLoaded", function () {
     video.volume = 0.2;
     video.play();
     setTimeout(animateLogo, 1500);
-    setTimeout(() => mainMenu.classList.add("show"), 3000);
+    setTimeout(
+      () => document.querySelector(".mainMenu").classList.add("show"),
+      3000
+    );
   }
 
   function animateLogo() {
@@ -30,6 +27,26 @@ document.addEventListener("DOMContentLoaded", function () {
     new Audio(sound).play();
   }
 
+  function playMenuMoveSound() {
+    playMenuSound("../assets/audios/MENUMOVE.WAV");
+  }
+
+  const listItems = document.querySelectorAll(".list li");
+  listItems.forEach((item) => {
+    item.addEventListener("mouseenter", playMenuMoveSound);
+    item.addEventListener("click", function () {
+      playMenuSound("../assets/audios/MENUSELECT.WAV");
+    });
+  });
+
+  // Event listeners
+  document.addEventListener("keydown", handleInteraction);
+  document.addEventListener("click", handleInteraction);
+  document.addEventListener("touchstart", handleInteraction);
+
+  // Functions
+  let interactionHandled = false;
+
   function handleInteraction(event) {
     if (!interactionHandled) {
       interactionHandled = true;
@@ -38,80 +55,67 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  function fadeOutVideo() {
-    const fadeOutDuration = 800;
-    const fadeOutInterval = 30;
-    let volume = video.volume;
-    const fadeOut = setInterval(() => {
-      volume -= fadeOutInterval / fadeOutDuration;
-      if (volume <= 0) {
-        clearInterval(fadeOut);
-        video.volume = 0;
-      } else {
-        video.volume = volume;
-      }
-    }, fadeOutInterval);
-  }
-
-  function handleMenuItemClick(event) {
-    const item = event.currentTarget;
-    const link = item.querySelector("a");
-    const excludedItems = ["Curriculum Vitae", "Contact Me", "Linkedin", "Github", "Mail", "Discord", "GO BACK"];
-    
-    if (!excludedItems.includes(link.textContent)) {
+  // Add black overlay, exclude for Contact Me item
+  menuItems.forEach((item) => {
+    if (
+      item.querySelector("a").textContent === "Curriculum Vitae" ||
+      item.querySelector("a").textContent === "Contact Me" ||
+      item.querySelector("a").textContent === "Linkedin" ||
+      item.querySelector("a").textContent === "Github" ||
+      item.querySelector("a").textContent === "Mail" ||
+      item.querySelector("a").textContent === "Discord" ||
+      item.querySelector("a").textContent === "GO BACK"
+    )
+      return;
+    item.addEventListener("click", function () {
       event.preventDefault();
       blackOverlay.style.opacity = "1";
       blackOverlay.style.pointerEvents = "auto";
       fadeOutVideo();
-      
-      // Special handling for Web Portfolio
-      if (link.textContent === "Web Portfolio") {
-        setTimeout(() => {
-          window.location.href = link.getAttribute("href");
-        }, 800);
-      } else {
-        // For other pages, remove the black overlay after transition
-        setTimeout(() => {
-          window.location.href = link.getAttribute("href");
-          blackOverlay.style.opacity = "0";
-          blackOverlay.style.pointerEvents = "none";
-        }, 800);
-      }
-    }
-  }
-
-  function toggleMenus() {
-    mainMenu.classList.toggle("show");
-    socialMenu.classList.toggle("show");
-  }
-
-  // Event listeners
-  document.addEventListener("keydown", handleInteraction);
-  document.addEventListener("click", handleInteraction);
-  document.addEventListener("touchstart", handleInteraction);
-
-  menuItems.forEach((item) => {
-    item.addEventListener("mouseenter", () => playMenuSound("../assets/audios/MENUMOVE.WAV"));
-    item.addEventListener("click", (event) => {
-      playMenuSound("../assets/audios/MENUSELECT.WAV");
-      handleMenuItemClick(event);
+      setTimeout(
+        () =>
+          (window.location.href = item.querySelector("a").getAttribute("href")),
+        800
+      );
     });
   });
 
-  contactMe.addEventListener("click", toggleMenus);
-  goBack.addEventListener("click", toggleMenus);
+  function fadeOutVideo() {
+    const fadeOutDuration = 800;
+    const fadeOutInterval = 30;
+    let volume = 0.1;
 
-  // Handle black overlay for Web Portfolio when navigating back
-  window.addEventListener("pageshow", function(event) {
-    if (event.persisted) {
-      // Check if we're on the Web Portfolio page
-      if (window.location.href.includes("web-portfolio")) {
-        blackOverlay.style.opacity = "1";
-        blackOverlay.style.pointerEvents = "auto";
-      } else {
-        blackOverlay.style.opacity = "0";
-        blackOverlay.style.pointerEvents = "none";
+    const fadeOutVideo = setInterval(() => {
+      volume -= fadeOutInterval / fadeOutDuration;
+      if (volume <= 0.0) {
+        volume = 0.0;
+        clearInterval(fadeOutVideo);
       }
-    }
+      video.volume = volume;
+    }, fadeOutInterval);
+  }
+
+  const contactMe = document.getElementById("contact-me");
+  const goBack = document.getElementById("go-back");
+
+  contactMe.addEventListener("click", function () {
+    setTimeout(
+      () => document.querySelector(".mainMenu").classList.remove("show"),
+      200
+    );
+    setTimeout(
+      () => document.querySelector(".socialMenu").classList.add("show"),
+      200
+    );
+  });
+  goBack.addEventListener("click", function () {
+    setTimeout(
+      () => document.querySelector(".socialMenu").classList.remove("show"),
+      200
+    );
+    setTimeout(
+      () => document.querySelector(".mainMenu").classList.add("show"),
+      200
+    );
   });
 });
